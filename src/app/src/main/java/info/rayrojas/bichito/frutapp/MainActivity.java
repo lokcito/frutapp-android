@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import info.rayrojas.bichito.frutapp.activities.AboutUsActivity;
+import info.rayrojas.bichito.frutapp.activities.ProductListActivity;
 import info.rayrojas.bichito.frutapp.generals.Settings;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,15 +19,24 @@ public class MainActivity extends AppCompatActivity {
     //Log.w(); // Warning
     //Log.e(); // Error
 
-    private Button btnEnter;
+    private Button btnProducts;
+    private Button btnAboutUs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnEnter = (Button) findViewById(R.id.btnEnter);
-        btnEnter.setOnClickListener(new View.OnClickListener() {
+        btnProducts = (Button) findViewById(R.id.btnEnter);
+        btnAboutUs = (Button) findViewById(R.id.btnAboutUs);
+        btnProducts.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.i(Settings.INFO, "Clic");
+                Log.i(Settings.INFO, "Products");
+                Intent i = new Intent(MainActivity.this, ProductListActivity.class);
+                startActivity(i);
+            }
+        });
+        btnAboutUs.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.i(Settings.INFO, "About us");
                 Intent i = new Intent(MainActivity.this, AboutUsActivity.class);
                 startActivity(i);
             }

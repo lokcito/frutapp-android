@@ -1,26 +1,47 @@
 package info.rayrojas.bichito.frutapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+
+import info.rayrojas.bichito.frutapp.activities.AboutUsActivity;
+import info.rayrojas.bichito.frutapp.generals.Settings;
 
 public class MainActivity extends AppCompatActivity {
 
+    //Log.v(); // Verbose
+    //Log.d(); // Debug
+    //Log.i(); // Info
+    //Log.w(); // Warning
+    //Log.e(); // Error
+
+    private Button btnEnter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        btnEnter = (Button) findViewById(R.id.btnEnter);
+        btnEnter.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.i(Settings.INFO, "Clic");
+                Intent i = new Intent(MainActivity.this, AboutUsActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d("Debuging", "La aplicacion entró en start");
+        Log.d(Settings.DEBUG, "La aplicacion entró en start");
     }
     @Override
     public void onResume(){
         super.onResume();
-        Log.d("Debuging", "La aplicacion entró en resume");
+        Log.d(Settings.DEBUG, "La aplicacion entró en resume");
         // put your code here...
 
     }
@@ -28,18 +49,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         // call the superclass method first
         super.onStop();
-        Log.d("Debuging", "La aplicacion entró en stop");
+        Log.d(Settings.DEBUG, "La aplicacion entró en stop");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Log.v("Debuging", "La aplicacion entró en pause");
+        Log.v(Settings.DEBUG, "La aplicacion entró en pause");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d("Debuging", "La aplicacion entró en destroy");
+        Log.d(Settings.DEBUG, "La aplicacion entró en destroy");
     }
 }

@@ -233,7 +233,7 @@ public class LoginActivity extends AppCompatActivity {
             showProgress(false);
 
             if (success) {
-                Intent o = new Intent(LoginActivity.this, MainActivity.class);
+                Intent o = new Intent(LoginActivity.this, ProductListActivity.class);
                 startActivity(o);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

@@ -1,16 +1,32 @@
 package info.rayrojas.bichito.frutapp.models;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+
+import info.rayrojas.bichito.frutapp.helpers.QueueUtils.QueueObject;
 
 
 public class Product {
     private int id;
     private String name;
     private String description;
+
+
     public Product(int i, String name) {
         this.id = i;
         this.name = name;
     }
+
+
 
     public int getId(){
         return this.id;
@@ -29,6 +45,41 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public static void injectProductsFromCloud(final QueueObject o, final ArrayList<Product> products) {
+        String url = "https://reqres.in/api/products?page=2";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        if (response.has("data")) {
+
+                            try {
+                                JSONArray list = response.getJSONArray("data");
+                                for (int i=0; i < list.length(); i++) {
+                                    JSONObject o = list.getJSONObject(i);
+                                    products.add(new Product(o.getInt("id"), o.getString("first_name")));
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO: Handle error
+                        int b = 2;
+                        b += 1;
+
+                    }
+                });
+        o.addToRequestQueue(jsonObjectRequest);
     }
 
     public static ArrayList<Product> getProductsAsString() {

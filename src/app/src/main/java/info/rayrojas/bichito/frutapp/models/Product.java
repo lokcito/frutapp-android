@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import info.rayrojas.bichito.frutapp.activities.ProductListActivity;
 import info.rayrojas.bichito.frutapp.helpers.QueueUtils.QueueObject;
 
 
@@ -47,7 +48,9 @@ public class Product {
         this.description = description;
     }
 
-    public static void injectProductsFromCloud(final QueueObject o, final ArrayList<Product> products) {
+    public static void injectProductsFromCloud(final QueueObject o,
+                                               final ArrayList<Product> products,
+                                               final ProductListActivity _interface) {
         String url = "https://reqres.in/api/products?page=2";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
@@ -61,12 +64,13 @@ public class Product {
                                 JSONArray list = response.getJSONArray("data");
                                 for (int i=0; i < list.length(); i++) {
                                     JSONObject o = list.getJSONObject(i);
-                                    products.add(new Product(o.getInt("id"), o.getString("first_name")));
+                                    products.add(new Product(o.getInt("id"), o.getString("name")));
                                 }
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+                            _interface.refreshList();
                         }
                     }
                 }, new Response.ErrorListener() {

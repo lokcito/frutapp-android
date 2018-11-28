@@ -24,7 +24,7 @@ import info.rayrojas.bichito.frutapp.models.Product;
 public class ProductListActivity extends AppCompatActivity {
     ListView listViewProducts;
     QueueObject queue = null;
-
+    ArrayAdapter<Product> itemsAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +36,9 @@ public class ProductListActivity extends AppCompatActivity {
 
         ArrayList<Product> items = new ArrayList<>();
 
-        Product.injectProductsFromCloud(queue, items);
+        Product.injectProductsFromCloud(queue, items, this);
 
-        ArrayAdapter<Product> itemsAdapter =
+        itemsAdapter =
                 new ArrayAdapter<Product>(this, android.R.layout.simple_list_item_1, items);
 
         listViewProducts.setAdapter(itemsAdapter);
@@ -66,5 +66,10 @@ public class ProductListActivity extends AppCompatActivity {
         }
         // put your code here...
 
+    }
+    public void refreshList(){
+        if ( itemsAdapter!= null ) {
+            itemsAdapter.notifyDataSetChanged();
+        }
     }
 }

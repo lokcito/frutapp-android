@@ -20,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,9 +33,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import info.rayrojas.bichito.frutapp.MainActivity;
 import info.rayrojas.bichito.frutapp.R;
+import info.rayrojas.bichito.frutapp.generals.Settings;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -59,13 +62,14 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-
+    private TextView txtLanguage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        txtLanguage = (TextView)  findViewById(R.id.txtLanguage);
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -89,8 +93,15 @@ public class LoginActivity extends AppCompatActivity {
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
-    }
 
+
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        txtLanguage.setText(Locale.getDefault().getDisplayLanguage());
+
+    }
 
     /**
      * Attempts to sign in or register the account specified by the login form.

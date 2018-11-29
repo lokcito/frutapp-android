@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
 
 import java.util.ArrayList;
 
@@ -26,6 +27,9 @@ public class ProductListActivity extends AppCompatActivity {
     ListView listViewProducts;
     QueueObject queue = null;
     ProductAdapter itemsAdapter;
+    private RequestQueue mRequestQueue;
+    private ImageLoader mImageLoader;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +44,7 @@ public class ProductListActivity extends AppCompatActivity {
         Product.injectProductsFromCloud(queue, items, this);
 
         itemsAdapter =
-                new ProductAdapter(this, android.R.layout.simple_list_item_1, items);
+                new ProductAdapter(this, android.R.layout.simple_list_item_1, items, queue.getImageLoader());
 
         listViewProducts.setAdapter(itemsAdapter);
 

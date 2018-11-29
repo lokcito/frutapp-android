@@ -33,6 +33,7 @@ public class Product {
     private String name;
     private String description;
     private String category;
+    private String smallImage;
     private float price;
     private Context contexto;
 
@@ -47,12 +48,13 @@ public class Product {
         this.description = description;
     }
 
-    public Product(int i, String name, String description, String category, String price) {
+    public Product(int i, String name, String description, String category, String price, String smallImage) {
         this.id = i;
         this.name = name;
         this.description = description;
         this.category = category;
         this.price = 12;
+        this.smallImage = smallImage;
     }
 
     public int getId(){
@@ -82,6 +84,10 @@ public class Product {
         return this.price;
     }
 
+    public String getSmallImage() {
+        return this.smallImage;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -106,7 +112,8 @@ public class Product {
                                             o.getString("name"),
                                             o.getString("description"),
                                             o.getString("category"),
-                                            o.getString("price")));
+                                            o.getString("price"),
+                                            o.getString("image")));
                                 }
 
                             } catch (JSONException e) {
@@ -146,7 +153,10 @@ public class Product {
                                     JSONObject o = list.getJSONObject(i);
                                     products.add(new Product(o.getInt("id"),
                                             o.getString("name"),
-                                            o.getString("description")));
+                                            o.getString("description"),
+                                            o.getString("category"),
+                                            o.getString("price"),
+                                            o.getString("image")));
                                 }
 
                             } catch (JSONException e) {

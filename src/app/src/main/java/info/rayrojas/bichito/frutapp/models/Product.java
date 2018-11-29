@@ -1,5 +1,10 @@
 package info.rayrojas.bichito.frutapp.models;
 
+import android.content.Context;
+import android.content.ContextWrapper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -10,6 +15,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 import info.rayrojas.bichito.frutapp.activities.ProductActivity;
@@ -21,7 +32,9 @@ public class Product {
     private int id;
     private String name;
     private String description;
-
+    private String category;
+    private float price;
+    private Context contexto;
 
     public Product(int i, String name) {
         this.id = i;
@@ -32,6 +45,14 @@ public class Product {
         this.id = i;
         this.name = name;
         this.description = description;
+    }
+
+    public Product(int i, String name, String description, String category, String price) {
+        this.id = i;
+        this.name = name;
+        this.description = description;
+        this.category = category;
+        this.price = 12;
     }
 
     public int getId(){
@@ -47,6 +68,18 @@ public class Product {
 
     public String getDescription() {
         return description;
+    }
+    public String getCategory(){
+        return this.category;
+    }
+    public float getPrice(){
+        return this.price;
+    }
+    public String getPriceText(){
+        return String.format("%.2f", this.price);
+    }
+    public Float getSmallBitMap(){
+        return this.price;
     }
 
     public void setDescription(String description) {
@@ -71,7 +104,9 @@ public class Product {
                                     JSONObject o = list.getJSONObject(i);
                                     products.add(new Product(o.getInt("id"),
                                             o.getString("name"),
-                                            o.getString("description")));
+                                            o.getString("description"),
+                                            o.getString("category"),
+                                            o.getString("price")));
                                 }
 
                             } catch (JSONException e) {
@@ -166,6 +201,55 @@ public class Product {
         }
         return null;
 
+    }
+
+    private Bitmap descargarImagen (String imageHttpAddress){
+        URL imageUrl = null;
+        Bitmap image = null;
+
+        String name = imageHttpAddress.replace("http://alpacanow.com", "_");
+        name = name.replace("http://cdn.alpacanow.com", "_");
+        name = name.replace("http://cdn.classicalpaca.com", "_");
+        name = name.replace("/", "_");
+
+        ContextWrapper cw = new ContextWrapper(contexto);
+        String archivos_rutas = cw.getFilesDir().getAbsolutePath();
+
+        String files_dir = "/data/data/com.sixquark.blanca.blanca/files/";
+        File file = new File(files_dir+name);
+        if (file.exists()) {
+            Bitmap myBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+            return myBitmap;
+        }else {
+            try {
+                imageUrl = new URL(imageHttpAddress);
+                HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                conn.connect();
+                image = BitmapFactory.decodeStream(conn.getInputStream());
+                String ruta = guardarImagen(contexto, name, image);
+                return image;
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            return image;
+        }
+
+    }
+
+    private String guardarImagen (Context context, String nombre, Bitmap imagen){
+        ContextWrapper cw = new ContextWrapper(context);
+        File myPath = new File(cw.getFilesDir(), nombre);
+        FileOutputStream fos = null;
+        try{
+            fos = new FileOutputStream(myPath);
+            imagen.compress(Bitmap.CompressFormat.JPEG, 60, fos);
+            fos.flush();
+        }catch (FileNotFoundException ex){
+            ex.printStackTrace();
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }
+        return myPath.getAbsolutePath();
     }
 
 }

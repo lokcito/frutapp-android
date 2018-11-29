@@ -16,6 +16,7 @@ import com.android.volley.RequestQueue;
 import java.util.ArrayList;
 
 import info.rayrojas.bichito.frutapp.R;
+import info.rayrojas.bichito.frutapp.adapters.ProductAdapter;
 import info.rayrojas.bichito.frutapp.generals.Settings;
 import info.rayrojas.bichito.frutapp.helpers.QueueUtils;
 import info.rayrojas.bichito.frutapp.helpers.QueueUtils.QueueObject;
@@ -24,7 +25,7 @@ import info.rayrojas.bichito.frutapp.models.Product;
 public class ProductListActivity extends AppCompatActivity {
     ListView listViewProducts;
     QueueObject queue = null;
-    ArrayAdapter<Product> itemsAdapter;
+    ProductAdapter itemsAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +40,7 @@ public class ProductListActivity extends AppCompatActivity {
         Product.injectProductsFromCloud(queue, items, this);
 
         itemsAdapter =
-                new ArrayAdapter<Product>(this, android.R.layout.simple_list_item_1, items);
+                new ProductAdapter(this, android.R.layout.simple_list_item_1, items);
 
         listViewProducts.setAdapter(itemsAdapter);
 

@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import info.rayrojas.bichito.frutapp.activities.ProductActivity;
 import info.rayrojas.bichito.frutapp.activities.ProductListActivity;
 import info.rayrojas.bichito.frutapp.helpers.QueueUtils.QueueObject;
 
@@ -27,7 +28,11 @@ public class Product {
         this.name = name;
     }
 
-
+    public Product(int i, String name, String description) {
+        this.id = i;
+        this.name = name;
+        this.description = description;
+    }
 
     public int getId(){
         return this.id;
@@ -50,9 +55,9 @@ public class Product {
 
     public static void injectProductsFromCloud(final QueueObject o,
                                                final ArrayList<Product> products,
-                                               final ProductListActivity _interface) {
-        String url = "https://reqres.in/api/products?page=2";
-
+                                               final ProductActivity _interface) {
+        String url = "https://reqres.in/api/products";
+        url = "http://still-fjord-66322.herokuapp.com/frutapp";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
@@ -64,7 +69,49 @@ public class Product {
                                 JSONArray list = response.getJSONArray("data");
                                 for (int i=0; i < list.length(); i++) {
                                     JSONObject o = list.getJSONObject(i);
-                                    products.add(new Product(o.getInt("id"), o.getString("name")));
+                                    products.add(new Product(o.getInt("id"),
+                                            o.getString("name"),
+                                            o.getString("description")));
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            _interface.refreshList();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO: Handle error
+                        int b = 2;
+                        b += 1;
+
+                    }
+                });
+        o.addToRequestQueue(jsonObjectRequest);
+    }
+
+    public static void injectProductsFromCloud(final QueueObject o,
+                                               final ArrayList<Product> products,
+                                               final ProductListActivity _interface) {
+        String url = "https://reqres.in/api/products";
+        url = "http://still-fjord-66322.herokuapp.com/frutapp";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        if (response.has("data")) {
+
+                            try {
+                                JSONArray list = response.getJSONArray("data");
+                                for (int i=0; i < list.length(); i++) {
+                                    JSONObject o = list.getJSONObject(i);
+                                    products.add(new Product(o.getInt("id"),
+                                            o.getString("name"),
+                                            o.getString("description")));
                                 }
 
                             } catch (JSONException e) {

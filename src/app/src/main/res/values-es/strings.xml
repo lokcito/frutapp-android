@@ -3,4 +3,6 @@
     <string name="prompt_password">Contrasena</string>
     <string name="cart_btn_update">Actualizar</string>
     <string name="cart_text_total">Total: </string>
+    <string name="cart_text_remove">Quitar</string>
+    <string name="cart_text_checkout">Pagar</string>
 </resources>

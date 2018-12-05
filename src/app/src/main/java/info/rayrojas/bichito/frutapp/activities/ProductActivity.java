@@ -3,6 +3,8 @@ package info.rayrojas.bichito.frutapp.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ public class ProductActivity extends AppCompatActivity {
     TextView textDescription;
     QueueUtils.QueueObject queue = null;
     ArrayList<Product> items;
+    Button btnBuy;
     int _productId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +29,19 @@ public class ProductActivity extends AppCompatActivity {
         Intent myIntent = getIntent(); // gets the previously created intent
         _productId = myIntent.getIntExtra("productId", 0);
         queue = QueueUtils.getInstance(this.getApplicationContext());
+        btnBuy = (Button)findViewById(R.id.btnBuy);
 
         items = new ArrayList<>();
 
         Product.injectProductsFromCloud(queue, items, this);
 
-
+        btnBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent o = new Intent(ProductActivity.this, CarActivity.class);
+                startActivity(o);
+            }
+        });
     }
     public void refreshList() {
         for(Product i : items) {

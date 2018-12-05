@@ -17,4 +17,9 @@
     <string name="cart_text_total">Total: </string>
     <string name="cart_text_remove">Remove</string>
     <string name="cart_text_checkout">Checkout</string>
+    <string name="cart_text_quantity">Quantity:</string>
+    <string name="cart_text_date">Date</string>
+    <string name="cart_text_partials">Partial ship</string>
+    <string name="cart_text_cancel">Cancelar</string>
+    <string name="cart_text_continue">Continue</string>
 </resources>

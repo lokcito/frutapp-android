@@ -59,7 +59,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:textSize="10dp"
-                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:textColor="@android:color/white"
+                        android:backgroundTint="@color/colorSuccess"
                         android:text="@string/cart_btn_update" />
                     <Button
                         android:id="@+id/btnRemove"
@@ -67,7 +68,7 @@
                         android:layout_height="40dp"
                         android:textSize="10dp"
                         android:textColor="@android:color/white"
-                        android:backgroundTint="@color/colorAccent"
+                        android:backgroundTint="@color/colorDanger"
                         android:text="@string/cart_text_remove" />
                 </LinearLayout>
             </LinearLayout>

@@ -21,6 +21,7 @@ public class ProductActivity extends AppCompatActivity {
     QueueUtils.QueueObject queue = null;
     ArrayList<Product> items;
     Button btnBuy;
+    Button btnWholesaleBuy;
     int _productId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class ProductActivity extends AppCompatActivity {
         _productId = myIntent.getIntExtra("productId", 0);
         queue = QueueUtils.getInstance(this.getApplicationContext());
         btnBuy = (Button)findViewById(R.id.btnBuy);
+        btnWholesaleBuy = (Button)findViewById(R.id.btnWholesaleBuy);
 
         items = new ArrayList<>();
 
@@ -39,6 +41,14 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent o = new Intent(ProductActivity.this, CarActivity.class);
+                startActivity(o);
+            }
+        });
+
+        btnWholesaleBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent o = new Intent(ProductActivity.this, WholesaleOrderActivity.class);
                 startActivity(o);
             }
         });

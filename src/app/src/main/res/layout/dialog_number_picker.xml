@@ -22,13 +22,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/colorDanger"
+            android:background="@android:color/transparent"
             android:text="Cancel" />
 
         <Button
             android:id="@+id/button1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:layout_weight="1"
-            android:text="Set" />
+            android:textColor="@color/colorSuccess"
+            android:text="Ok" />
     </LinearLayout>
 </LinearLayout>

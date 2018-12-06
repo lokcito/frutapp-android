@@ -17,65 +17,109 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:weightSum="20">
+            android:weightSum="15">
 
-            <TextView
-                android:id="@+id/textView10"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/cart_text_quantity"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="@string/cart_text_quantity" />
 
-            <EditText
-                android:id="@+id/txtQty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="date"
-                android:drawableLeft="@android:drawable/ic_menu_agenda"
-                android:layout_weight="1"/>
+                <Button
+                    android:id="@+id/btnQty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:drawableRight="@android:drawable/btn_dialog"
+                    android:text="12" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:background="#90909090" />
+            <!--<EditText-->
+            <!--android:id="@+id/txtQty"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:ems="10"-->
+            <!--android:inputType="date"-->
+            <!--android:drawableLeft="@android:drawable/ic_menu_agenda"-->
+            <!--android:layout_weight="1"/>-->
 
 
             <Switch
                 android:id="@+id/switch2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/cart_text_partials"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:text="@string/cart_text_partials" />
 
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="#90909090" />
 
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/cart_text_date"
-                android:layout_weight="1"/>
-
-            <EditText
-                android:id="@+id/txtDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="date"
-                android:drawableLeft="@android:drawable/ic_menu_agenda"
-                android:layout_weight="1"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_weight="1"
-                android:weightSum="10">
-            <Button
-                android:id="@+id/btnCancel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/cart_text_cancel" />
-                <Button
-                    android:id="@+id/btnContinue"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/textView5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/cart_text_continue"/>
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="@string/cart_text_date" />
+
+                <Button
+                    android:id="@+id/btnDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:drawableRight="@android:drawable/ic_menu_agenda"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:orientation="horizontal"
+                android:gravity="center|bottom"
+                android:weightSum="10">
+
+                <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:text="@string/cart_text_cancel"
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="@color/colorAccent"/>
+
+                <Button
+                    android:id="@+id/btnContinue"
+                    android:layout_weight="5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cart_text_continue"
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="@color/colorSuccess"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

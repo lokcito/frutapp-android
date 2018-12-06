@@ -17,8 +17,8 @@ import info.rayrojas.bichito.frutapp.R;
 
 public class WholesaleOrderActivity extends AppCompatActivity {
 
-    EditText txtDate;
-    EditText txtQty;
+    Button btnDate;
+    Button btnQty;
     Calendar calendar;
     String cero = "0";
     String slash = "/";
@@ -27,17 +27,17 @@ public class WholesaleOrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wholesale_order);
-        txtDate = (EditText)findViewById(R.id.txtDate);
-        txtDate.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+        btnDate = (Button) findViewById(R.id.btnDate);
+        btnDate.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if ( hasFocus ) {
-                    showDatePicker();
-                }
+            public void onClick(View v) {
+                showDatePicker();
             }
         });
-        txtQty = (EditText)findViewById(R.id.txtQty);
-        txtQty.setOnClickListener(new View.OnClickListener()
+
+        btnQty = (Button)findViewById(R.id.btnQty);
+        btnQty.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
@@ -73,6 +73,8 @@ public class WholesaleOrderActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         calendar = Calendar.getInstance();
+        String _date = calendar.get(Calendar.DAY_OF_MONTH) + slash + calendar.get(Calendar.MONTH) + slash + calendar.get(Calendar.YEAR);
+        btnDate.setText(_date);
     }
 
     private void showNumberPicker() {
@@ -90,7 +92,7 @@ public class WholesaleOrderActivity extends AppCompatActivity {
         {
             @Override
             public void onClick(View v) {
-                txtQty.setText(String.valueOf(np.getValue()));
+                btnQty.setText(String.valueOf(np.getValue()));
                 dialogUI.dismiss();
             }
         });
@@ -115,7 +117,7 @@ public class WholesaleOrderActivity extends AppCompatActivity {
                 //Formateo el mes obtenido: antepone el 0 si son menores de 10
                 String mesFormateado = (mesActual < 10)? cero + String.valueOf(mesActual):String.valueOf(mesActual);
                 //Muestro la fecha con el formato deseado
-                txtDate.setText(diaFormateado + slash + mesFormateado + slash + year);
+                btnDate.setText(diaFormateado + slash + mesFormateado + slash + year);
 
 
             }

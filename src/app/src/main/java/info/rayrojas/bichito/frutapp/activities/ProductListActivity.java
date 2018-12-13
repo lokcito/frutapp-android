@@ -29,7 +29,7 @@ public class ProductListActivity extends AppCompatActivity {
     ProductAdapter itemsAdapter;
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
-
+    ArrayList<Product> items;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +39,7 @@ public class ProductListActivity extends AppCompatActivity {
 
         listViewProducts = (ListView) findViewById(R.id.listViewProducts);
 
-        ArrayList<Product> items = new ArrayList<>();
+        items = new ArrayList<>();
 
         Product.injectProductsFromCloud(queue, items, this);
 
@@ -50,14 +50,7 @@ public class ProductListActivity extends AppCompatActivity {
 
         listViewProducts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
-                Product selItem = (Product) adapter.getItemAtPosition(position);
-                if ( selItem != null ) {
-                    Intent o = new Intent(ProductListActivity.this, ProductActivity.class);
-                    o.putExtra("productId", selItem.getId());
 
-                    startActivity(o);
-                    Log.d(Settings.DEBUG, "La aplicacion dijo: " + selItem.getName());
-                }
             }
         });
     }
@@ -75,6 +68,17 @@ public class ProductListActivity extends AppCompatActivity {
     public void refreshList(){
         if ( itemsAdapter!= null ) {
             itemsAdapter.notifyDataSetChanged();
+        }
+    }
+    public void selectProduct(int position) {
+        Product selItem = items.get(position);
+
+        if ( selItem != null ) {
+            Intent o = new Intent(ProductListActivity.this, ProductActivity.class);
+            o.putExtra("productId", selItem.getId());
+
+            startActivity(o);
+            Log.d(Settings.DEBUG, "La aplicacion dijo: " + selItem.getName());
         }
     }
 }

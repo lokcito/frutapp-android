@@ -2,10 +2,14 @@ package info.rayrojas.bichito.frutapp.adapters;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.media.Image;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +19,10 @@ import com.android.volley.toolbox.NetworkImageView;
 import java.util.List;
 
 import info.rayrojas.bichito.frutapp.R;
+import info.rayrojas.bichito.frutapp.activities.CarActivity;
+import info.rayrojas.bichito.frutapp.activities.ProductActivity;
+import info.rayrojas.bichito.frutapp.activities.ProductListActivity;
+import info.rayrojas.bichito.frutapp.generals.Settings;
 import info.rayrojas.bichito.frutapp.helpers.QueueUtils;
 import info.rayrojas.bichito.frutapp.models.Product;
 
@@ -29,6 +37,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         TextView price;
         TextView description;
         TextView category;
+        ImageButton btnAddToBag;
 
         private ViewHolder() {
         }
@@ -40,9 +49,9 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         this.queue = _queue;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-        Product rowItem = (Product) getItem(position);
+        final Product rowItem = (Product) getItem(position);
         LayoutInflater mInflater = (LayoutInflater) this.context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.adapter_product_item, null);
@@ -53,6 +62,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
             holder.price = (TextView) convertView.findViewById(R.id.price);
             holder.description = (TextView) convertView.findViewById(R.id.description);
             holder.category = (TextView) convertView.findViewById(R.id.category);
+            holder.btnAddToBag = (ImageButton) convertView.findViewById(R.id.btnAddToBag);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -67,6 +77,16 @@ public class ProductAdapter extends ArrayAdapter<Product> {
             holder.image.setImageUrl(
                     rowItem.getSmallImage(), queue);
         }
+
+        holder.btnAddToBag.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                ProductListActivity activity = (ProductListActivity) context;
+                activity.selectProduct(position);
+
+            }
+        });
 
 
 //        holder.image.setImageBitmap(rowItem.getSmallBitMap());

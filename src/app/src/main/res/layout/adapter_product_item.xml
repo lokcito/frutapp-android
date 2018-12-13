@@ -32,6 +32,7 @@
                     android:text="TextView"
                     android:textStyle="normal|bold"
                     android:layout_weight="1"/>
+
                 <ImageButton
                     android:id="@+id/btnAddToBag"
                     android:layout_width="30dp"

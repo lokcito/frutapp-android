@@ -34,8 +34,8 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         }
     }
 
-    public ProductAdapter(Context context, int resourceId, List<Product> items, ImageLoader _queue) {
-        super(context, resourceId, items);
+    public ProductAdapter(Context context, List<Product> items, ImageLoader _queue) {
+        super(context, 0, items);
         this.context = context;
         this.queue = _queue;
     }

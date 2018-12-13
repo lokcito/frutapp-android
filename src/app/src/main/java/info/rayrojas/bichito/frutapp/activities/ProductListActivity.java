@@ -44,7 +44,7 @@ public class ProductListActivity extends AppCompatActivity {
         Product.injectProductsFromCloud(queue, items, this);
 
         itemsAdapter =
-                new ProductAdapter(this, android.R.layout.simple_list_item_1, items, queue.getImageLoader());
+                new ProductAdapter(this, items, queue.getImageLoader());
 
         listViewProducts.setAdapter(itemsAdapter);
 

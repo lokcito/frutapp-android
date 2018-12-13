@@ -52,24 +52,31 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
-                    <Button
+                    <ImageButton
+                        android:gravity="left"
                         android:id="@+id/btnUpdate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:textSize="10dp"
-                        android:textColor="@android:color/white"
-                        android:backgroundTint="@color/colorSuccess"
-                        android:text="@string/cart_btn_update" />
-                    <Button
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_baseline_done_24px"
+                        android:tint="@android:color/white"
+                        android:background="@drawable/round_corner_green"
+                        android:scaleType="fitCenter"
+                        android:layout_marginRight="20dp"
+                        />
+                    <ImageButton
                         android:id="@+id/btnRemove"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:textSize="10dp"
-                        android:textColor="@android:color/white"
-                        android:backgroundTint="@color/colorDanger"
-                        android:text="@string/cart_text_remove" />
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_baseline_clear_24px"
+                        android:tint="@android:color/white"
+                        android:background="@drawable/round_corner_pink"
+                        android:scaleType="fitCenter"
+                        android:gravity="end"
+
+                        />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

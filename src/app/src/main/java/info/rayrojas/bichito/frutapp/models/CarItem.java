@@ -62,6 +62,8 @@ public class CarItem {
         ArrayList<CarItem> o = new ArrayList<>();
         o.add(new CarItem(1, "Granola", 12, 34));
         o.add(new CarItem(1, "Galleta", 2, 15));
+        o.add(new CarItem(1, "Harinas", 2, 15));
+        o.add(new CarItem(1, "Frutos secos", 2, 15));
         return o;
     }
 }

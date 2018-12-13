@@ -40,7 +40,7 @@
                     android:padding="5dp"
                     android:src="@drawable/ic_baseline_add_shopping_cart_24px"
                     android:tint="@android:color/white"
-                    android:background="@drawable/roundcorner"
+                    android:background="@drawable/round_corner"
                     android:scaleType="fitCenter"
                     />
             </LinearLayout>

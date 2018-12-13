@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -29,8 +30,8 @@ public class CarItemAdapter extends ArrayAdapter<CarItem> {
         TextView text;
         TextView price;
         EditText qty;
-        Button btnUpdate;
-        Button btnRemove;
+        ImageButton btnUpdate;
+        ImageButton btnRemove;
 
 //        TextView category;
 
@@ -54,7 +55,7 @@ public class CarItemAdapter extends ArrayAdapter<CarItem> {
 //            holder.image = (NetworkImageView)convertView.findViewById(R.id.image);
             holder.text = (TextView) convertView.findViewById(R.id.txtText);
             holder.qty = (EditText) convertView.findViewById(R.id.editTextQty);
-            holder.btnUpdate = (Button) convertView.findViewById(R.id.btnUpdate);
+            holder.btnUpdate = (ImageButton) convertView.findViewById(R.id.btnUpdate);
 
             convertView.setTag(holder);
         } else {

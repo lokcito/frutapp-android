@@ -38,7 +38,7 @@ public class CarActivity extends AppCompatActivity {
         items = CarItem.get();
 
         itemsAdapter =
-                new CarItemAdapter(this, R.layout.adapter_car_item, items);
+                new CarItemAdapter(this, items);
 
         listViewCarItems.setAdapter(itemsAdapter);
 

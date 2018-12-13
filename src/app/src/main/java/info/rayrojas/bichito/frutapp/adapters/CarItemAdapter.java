@@ -38,8 +38,8 @@ public class CarItemAdapter extends ArrayAdapter<CarItem> {
         }
     }
 
-    public CarItemAdapter(Context context, int resourceId, List<CarItem> items) {
-        super(context, resourceId, items);
+    public CarItemAdapter(Context context, List<CarItem> items) {
+        super(context, 0, items);
         this.context = context;
     }
 

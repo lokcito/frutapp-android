@@ -4,5 +4,7 @@
     <color name="colorPrimaryDark">#ed1c24</color>
     <color name="colorDanger">#fc3158</color>
     <color name="colorSuccess">#53d769</color>
+    <color name="colorSuccessDark">#2ab441</color>
     <color name="colorInfo">#147efb</color>
+    <color name="colorMute">#aaa</color>
 </resources>

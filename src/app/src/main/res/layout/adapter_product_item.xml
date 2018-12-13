@@ -21,25 +21,43 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp">
-
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="115dp"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textStyle="normal|bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textStyle="normal|bold"
+                    android:layout_weight="1"/>
+                <ImageButton
+                    android:id="@+id/btnAddToBag"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_baseline_add_shopping_cart_24px"
+                    android:tint="@android:color/white"
+                    android:background="@drawable/roundcorner"
+                    android:scaleType="fitCenter"
+                    />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/price"
                 android:layout_width="74dp"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textStyle="normal|bold"
+                android:textColor="@color/colorSuccessDark"/>
 
             <TextView
                 android:id="@+id/category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="@color/colorPrimaryDark"
                 android:textStyle="normal|italic"
                 android:textSize="12sp" />
 
@@ -48,6 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="@color/colorMute"
                 />
 
         </LinearLayout>

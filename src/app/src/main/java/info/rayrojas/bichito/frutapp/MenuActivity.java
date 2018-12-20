@@ -1,5 +1,6 @@
 package info.rayrojas.bichito.frutapp;
 
+
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,9 +14,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import info.rayrojas.bichito.frutapp.fragments.AboutUsFragment;
+import info.rayrojas.bichito.frutapp.fragments.CarFragment;
+import info.rayrojas.bichito.frutapp.fragments.ProductListFragment;
+
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    //FrameLayout frameLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +46,14 @@ public class MenuActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //frameLayout = findViewById(R.id.mainFragment);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        fragmentChange("product-list");
     }
 
     @Override
@@ -81,12 +95,13 @@ public class MenuActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
+            fragmentChange("product-list");
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-
+            fragmentChange("cart");
         } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
+            fragmentChange("about");
+//        } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
 
@@ -97,5 +112,22 @@ public class MenuActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void fragmentChange(String _fragment) {
+        if ( _fragment.equals("product-list") ) {
+            getFragmentManager().beginTransaction().
+                    replace(R.id.mainFragment, new ProductListFragment()).addToBackStack(null).commit();
+        } else if ( _fragment.equals("cart") ) {
+            getFragmentManager().beginTransaction().
+                    replace(R.id.mainFragment, new CarFragment()).addToBackStack(null).commit();
+        } else if ( _fragment.equals("about-us") ) {
+            getFragmentManager().beginTransaction().
+                    replace(R.id.mainFragment, new AboutUsFragment()).addToBackStack(null).commit();
+        }
+
+
+
+
     }
 }

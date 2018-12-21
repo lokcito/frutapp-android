@@ -20,11 +20,7 @@
         <activity
             android:name=".SplashScreenActivity"
             android:theme="@style/SplashScreenTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activities.AboutUsActivity" />
         <activity android:name=".activities.ProductListActivity" />
@@ -34,7 +30,16 @@
         <activity android:name=".activities.ProductActivity" />
         <activity android:name=".activities.CarActivity" />
         <activity android:name=".activities.CheckoutActivity" />
-        <activity android:name=".activities.WholesaleOrderActivity">
+        <activity android:name=".activities.WholesaleOrderActivity"></activity>
+        <activity
+            android:name=".MenuActivity"
+            android:label="@string/title_activity_menu"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

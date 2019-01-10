@@ -128,6 +128,7 @@ public class CarFragment extends Fragment {
     public void setPurchaseOrder(PurchaseOrder _o) {
         this.purchaseOrder = _o;
         Toast.makeText(this.getActivity(),
-                String.format("Nueva orden: %d", this.purchaseOrder.getId()), Toast.LENGTH_SHORT).show();
+                String.format("Nueva orden: %d", this.purchaseOrder.getId()),
+                Toast.LENGTH_SHORT).show();
     }
 }

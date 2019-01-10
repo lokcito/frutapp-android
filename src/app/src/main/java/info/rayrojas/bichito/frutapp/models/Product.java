@@ -103,25 +103,25 @@ public class Product {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        if (response.has("data")) {
+                    if (response.has("data")) {
 
-                            try {
-                                JSONArray list = response.getJSONArray("data");
-                                for (int i=0; i < list.length(); i++) {
-                                    JSONObject o = list.getJSONObject(i);
-                                    products.add(new Product(o.getInt("id"),
-                                            o.getString("name"),
-                                            o.getString("description"),
-                                            o.getString("category"),
-                                            o.getString("price"),
-                                            o.getString("image")));
-                                }
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                        try {
+                            JSONArray list = response.getJSONArray("data");
+                            for (int i=0; i < list.length(); i++) {
+                                JSONObject o = list.getJSONObject(i);
+                                products.add(new Product(o.getInt("id"),
+                                        o.getString("name"),
+                                        o.getString("description"),
+                                        o.getString("category"),
+                                        o.getString("price"),
+                                        o.getString("image")));
                             }
-                            _interface.refreshList();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
+                        _interface.refreshList();
+                    }
                     }
                 }, new Response.ErrorListener() {
 

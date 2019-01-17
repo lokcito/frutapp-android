@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import info.rayrojas.bichito.frutapp.fragments.AboutUsFragment;
+import info.rayrojas.bichito.frutapp.fragments.AccountFragment;
 import info.rayrojas.bichito.frutapp.fragments.CarFragment;
 import info.rayrojas.bichito.frutapp.fragments.ProductListFragment;
 
@@ -103,10 +104,12 @@ public class MenuActivity extends AppCompatActivity
             fragmentChange("about");
 //        } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_share) {
+//        } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
+        } else if ( id == R.id.show_my_account ) {
+            fragmentChange("my-account");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -124,6 +127,9 @@ public class MenuActivity extends AppCompatActivity
         } else if ( _fragment.equals("about-us") ) {
             getFragmentManager().beginTransaction().
                     replace(R.id.mainFragment, new AboutUsFragment()).addToBackStack(null).commit();
+        } else if ( _fragment.equals("my-account") ) {
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.mainFragment, new AccountFragment()).addToBackStack(null).commit();
         }
 
 

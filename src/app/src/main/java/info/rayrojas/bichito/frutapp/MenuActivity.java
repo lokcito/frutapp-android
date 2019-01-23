@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import info.rayrojas.bichito.frutapp.fragments.AboutUsFragment;
 import info.rayrojas.bichito.frutapp.fragments.AccountFragment;
 import info.rayrojas.bichito.frutapp.fragments.CarFragment;
+import info.rayrojas.bichito.frutapp.fragments.ProductFragment;
 import info.rayrojas.bichito.frutapp.fragments.ProductListFragment;
 
 public class MenuActivity extends AppCompatActivity
@@ -127,13 +128,17 @@ public class MenuActivity extends AppCompatActivity
         } else if ( _fragment.equals("about-us") ) {
             getFragmentManager().beginTransaction().
                     replace(R.id.mainFragment, new AboutUsFragment()).addToBackStack(null).commit();
+        } else if ( _fragment.equals("product") ) {
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.mainFragment, new ProductFragment()).addToBackStack(null).commit();
         } else if ( _fragment.equals("my-account") ) {
             getFragmentManager().beginTransaction()
                     .replace(R.id.mainFragment, new AccountFragment()).addToBackStack(null).commit();
         }
-
-
-
-
     }
+
+    public void productListFragmentSelectProduct(int position) {
+        fragmentChange("product");
+    }
+
 }

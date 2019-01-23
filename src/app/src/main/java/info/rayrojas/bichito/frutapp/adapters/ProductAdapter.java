@@ -18,6 +18,7 @@ import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.List;
 
+import info.rayrojas.bichito.frutapp.MenuActivity;
 import info.rayrojas.bichito.frutapp.R;
 import info.rayrojas.bichito.frutapp.activities.CarActivity;
 import info.rayrojas.bichito.frutapp.activities.ProductActivity;
@@ -82,8 +83,8 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
             @Override
             public void onClick(View v) {
-                ProductListActivity activity = (ProductListActivity) context;
-                activity.selectProduct(position);
+                MenuActivity activity = (MenuActivity) context;
+                activity.productListFragmentSelectProduct(position);
 
             }
         });

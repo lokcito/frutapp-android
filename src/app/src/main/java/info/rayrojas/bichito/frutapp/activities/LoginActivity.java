@@ -36,8 +36,10 @@ import java.util.List;
 import java.util.Locale;
 
 import info.rayrojas.bichito.frutapp.MainActivity;
+import info.rayrojas.bichito.frutapp.MenuActivity;
 import info.rayrojas.bichito.frutapp.R;
 import info.rayrojas.bichito.frutapp.generals.Settings;
+import info.rayrojas.bichito.frutapp.models.User;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -244,7 +246,12 @@ public class LoginActivity extends AppCompatActivity {
             showProgress(false);
 
             if (success) {
-                Intent o = new Intent(LoginActivity.this, ProductListActivity.class);
+                User currentUser = new User();
+                currentUser.first_name = "Bicho";
+                currentUser.id = 1;
+                currentUser.setLocal(LoginActivity.this);
+
+                Intent o = new Intent(LoginActivity.this, MenuActivity.class);
                 startActivity(o);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

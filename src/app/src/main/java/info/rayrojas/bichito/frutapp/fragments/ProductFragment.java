@@ -7,21 +7,18 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import info.rayrojas.bichito.frutapp.R;
-import info.rayrojas.bichito.frutapp.helpers.QueueUtils;
-import info.rayrojas.bichito.frutapp.models.User;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link AccountFragment.OnFragmentInteractionListener} interface
+ * {@link ProductFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link AccountFragment#newInstance} factory method to
+ * Use the {@link ProductFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AccountFragment extends Fragment {
+public class ProductFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,12 +27,10 @@ public class AccountFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    public User currentUser;
-    public TextView txtUserFistName;
-    QueueUtils.QueueObject queue = null;
+
     private OnFragmentInteractionListener mListener;
 
-    public AccountFragment() {
+    public ProductFragment() {
         // Required empty public constructor
     }
 
@@ -45,11 +40,11 @@ public class AccountFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AccountFragment.
+     * @return A new instance of fragment ProductFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AccountFragment newInstance(String param1, String param2) {
-        AccountFragment fragment = new AccountFragment();
+    public static ProductFragment newInstance(String param1, String param2) {
+        ProductFragment fragment = new ProductFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -70,13 +65,7 @@ public class AccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_account, container, false);
-        txtUserFistName = (TextView) v.findViewById(R.id.txtUserFirstName);
-        queue = QueueUtils.getInstance(this.getActivity().getApplicationContext());
-
-        User.sync(queue, "bichito", AccountFragment.this);
-
-        return v;
+        return inflater.inflate(R.layout.fragment_product, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -116,14 +105,5 @@ public class AccountFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
-    public void setUser(User _user) {
-        currentUser = _user;
-        this.setTxtUserFistName(currentUser.first_name);
-        currentUser.setLocal(this.getActivity().getApplicationContext());
-
-    }
-    public void setTxtUserFistName(String _username) {
-        txtUserFistName.setText(String.format("Hola, %s", _username));
     }
 }

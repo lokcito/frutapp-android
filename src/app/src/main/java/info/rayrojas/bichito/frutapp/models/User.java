@@ -34,15 +34,6 @@ public class User {
     }
 
     /* LocalStorage */
-    private static final String SQL_CREATE_TABLE =
-            "CREATE TABLE " + UserTable.TABLE_NAME + " (" +
-                    UserTable._ID + " INTEGER PRIMARY KEY," +
-                    UserTable.COLUMN_NAME_FIRST_NAME + " TEXT," +
-                    UserTable.COLUMN_NAME_TOKEN + " TEXT)";
-
-
-    private static final String SQL_DELETE_ENTRIES =
-            "DROP TABLE IF EXISTS " + UserTable.TABLE_NAME;
 
     public static class UserTable implements BaseColumns {
         public static final String TABLE_NAME = "frutapp_user";
@@ -51,6 +42,16 @@ public class User {
     }
 
     public class UserDbHelper extends SQLiteOpenHelper {
+
+        private static final String SQL_CREATE_TABLE =
+                "CREATE TABLE " + UserTable.TABLE_NAME + " (" +
+                        UserTable._ID + " INTEGER PRIMARY KEY," +
+                        UserTable.COLUMN_NAME_FIRST_NAME + " TEXT," +
+                        UserTable.COLUMN_NAME_TOKEN + " TEXT)";
+
+
+        private static final String SQL_DELETE_ENTRIES =
+                "DROP TABLE IF EXISTS " + UserTable.TABLE_NAME;
 
         public UserDbHelper(Context context) {
             super(context, Settings.DATABASE_NAME, null, Settings.DATABASE_VERSION);

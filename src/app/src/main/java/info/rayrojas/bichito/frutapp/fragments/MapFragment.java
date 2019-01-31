@@ -1,12 +1,17 @@
 package info.rayrojas.bichito.frutapp.fragments;
 
 import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ZoomControls;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -25,7 +30,7 @@ import info.rayrojas.bichito.frutapp.R;
  * Use the {@link MapFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MapFragment extends Fragment implements OnMapReadyCallback {
+public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,10 +39,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
     private MapView mMapView;
     private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
-
-
+    private TextView textViewCurrentLocation;
+    private ZoomControls zoomControls;
+    private GoogleMap googleMapInstance;
     private OnFragmentInteractionListener mListener;
 
     public MapFragment() {
@@ -76,14 +83,41 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_map, container, false);
+
+        textViewCurrentLocation = (TextView)v.findViewById(R.id.txtCurrentLocation);
+
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
         }
         mMapView = (MapView) v.findViewById(R.id.mapView);
+//        mMapView.setb
         mMapView.onCreate(mapViewBundle);
 
         mMapView.getMapAsync(this);
+
+        mMapView.setClickable(true);
+        zoomControls = (ZoomControls) v.findViewById(R.id.zoomcontrols);
+        zoomControls.setOnZoomInClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if ( googleMapInstance == null ) {
+                    return;
+                }
+                googleMapInstance.animateCamera(CameraUpdateFactory.zoomTo( 17.0f ));
+//                mMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
+
+            }
+        });
+        zoomControls.setOnZoomOutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if ( googleMapInstance == null ) {
+                    return;
+                }
+                googleMapInstance.animateCamera(CameraUpdateFactory.zoomTo( 10.0f ));
+            }
+        });
 
         return v;
     }
@@ -114,12 +148,53 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        googleMapInstance = googleMap;
         LatLng coordinates = new LatLng(-12.0611391,-75.2127232);
         googleMap.addMarker(new MarkerOptions().position(coordinates).title("Marker"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 15));
         mMapView.onResume();
 
+        googleMap.setOnMapClickListener(this);
+//        mMap.setOnMapLongClickListener(this);
+//        mMap.setOnCameraIdleListener(this);
+//
     }
+
+    @Override
+    public void onMapClick(LatLng location) {
+
+
+//        if (location != null) {
+//            textViewCurrentLocation.setText(location.toString());
+//            System.out.println("in onlocationchanged");
+//            String locationString = location. .convert(location.getLatitude(), 1);
+//            Toast.makeText(this, "locationString==" + locationString, Toast.LENGTH_LONG).show();
+//            double lat = location.getLatitude();
+//            double lng = location.getLongitude();
+//            String currentLocation = "The location is changed to Lat: " + lat + " Lng: " + lng;
+//            Toast.makeText(this, currentLocation, Toast.LENGTH_LONG).show();
+//        }
+    }
+
+//    @Override
+//    public void onLocationChanged(Location location) {
+//        textViewCurrentLocation.setText(location.toString());
+//    }
+//
+//    @Override
+//    public void onStatusChanged(String provider, int status, Bundle extras) {
+//
+//    }
+//
+//    @Override
+//    public void onProviderEnabled(String provider) {
+//
+//    }
+//
+//    @Override
+//    public void onProviderDisabled(String provider) {
+//
+//    }
 
     /**
      * This interface must be implemented by activities that contain this

@@ -32,4 +32,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
+        AIzaSyBjT8DamHvea_7XSm3rAND8uJ_Q8CWbNrg
+    </string>
 </resources>

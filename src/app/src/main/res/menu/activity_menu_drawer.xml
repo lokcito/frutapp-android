@@ -21,6 +21,10 @@
     <item android:title="Hola Ray">
         <menu>
             <item
+                android:id="@+id/send_message"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Enviar mensaje" />
+            <item
                 android:id="@+id/show_my_account"
                 android:icon="@drawable/ic_menu_share"
                 android:title="Mi cuenta" />

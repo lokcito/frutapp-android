@@ -2,8 +2,12 @@ package info.rayrojas.bichito.frutapp;
 
 
 import android.os.Bundle;
+import android.os.Debug;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +17,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 
 import info.rayrojas.bichito.frutapp.fragments.AboutUsFragment;
 import info.rayrojas.bichito.frutapp.fragments.AccountFragment;
@@ -20,10 +33,14 @@ import info.rayrojas.bichito.frutapp.fragments.CarFragment;
 import info.rayrojas.bichito.frutapp.fragments.MapFragment;
 import info.rayrojas.bichito.frutapp.fragments.ProductFragment;
 import info.rayrojas.bichito.frutapp.fragments.ProductListFragment;
+import info.rayrojas.bichito.frutapp.generals.Settings;
+import info.rayrojas.bichito.frutapp.models.Product;
 
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    FirebaseDatabase databaseFireBase;
+    DatabaseReference productsReference;
     //FrameLayout frameLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +67,43 @@ public class MenuActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //frameLayout = findViewById(R.id.mainFragment);
+        databaseFireBase = FirebaseDatabase.getInstance();
+        productsReference = databaseFireBase.getReference("products");
+
+        /* Si queremos escuchar cambios */
+        productsReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                if ( dataSnapshot != null ) {
+                    Product o = dataSnapshot.getValue(Product.class);
+                    if ( o != null ) {
+                        Toast.makeText(MenuActivity.this,
+                            String.format("Producto agregado es: %s", o.getName()),
+                            Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -104,10 +157,15 @@ public class MenuActivity extends AppCompatActivity
             fragmentChange("cart");
         } else if (id == R.id.nav_slideshow) {
             fragmentChange("about");
-//        } else if (id == R.id.nav_manage) {
+        } else if ( id == R.id.send_message ) {
+            /* Enviamos datos a firebase */
+            ArrayList<Product> products = new ArrayList<>();
 
-//        } else if (id == R.id.nav_share) {
+            Product myNewProduct = new Product(1, "Galletas integrales");
+            products.add(myNewProduct);
 
+            productsReference.setValue(products);
+            /* Enviamos datos a firebase */
         } else if (id == R.id.nav_send) {
             fragmentChange("maps");
         } else if ( id == R.id.show_my_account ) {

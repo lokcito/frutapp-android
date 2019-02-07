@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "543481376887",
+    "firebase_url": "https://firstproject-13ac7.firebaseio.com",
+    "project_id": "firstproject-13ac7",
+    "storage_bucket": "firstproject-13ac7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543481376887:android:44b34d79bed9df5b",
+        "android_client_info": {
+          "package_name": "frutapp.frutapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543481376887-3e5l7l27023ep6blar5483qvfodcue7v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBa6TCfQN1JMH41g82_eX5i7AItL353Cl0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543481376887:android:d3efa22419f2b973",
+        "android_client_info": {
+          "package_name": "info.rayrojas.bichito.frutapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543481376887-3e5l7l27023ep6blar5483qvfodcue7v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBa6TCfQN1JMH41g82_eX5i7AItL353Cl0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

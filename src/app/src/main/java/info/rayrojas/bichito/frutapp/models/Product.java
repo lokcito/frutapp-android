@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -36,26 +35,30 @@ public class Product {
     private String category;
     private String smallImage;
     private float price;
-    private Context contexto;
+    //private Context contexto;
+
+    public Product() {
+
+    }
 
     public Product(int i, String name) {
-        this.id = i;
-        this.name = name;
+        this.setId(i);
+        this.setName(name);
     }
 
     public Product(int i, String name, String description) {
-        this.id = i;
-        this.name = name;
-        this.description = description;
+        this.setId(i);
+        this.setName(name);
+        this.setDescription(description);
     }
 
     public Product(int i, String name, String description, String category, String price, String smallImage) {
-        this.id = i;
-        this.name = name;
-        this.description = description;
-        this.category = category;
-        this.price = 12;
-        this.smallImage = smallImage;
+        this.setId(i);
+        this.setName(name);
+        this.setDescription(description);
+        this.setCategory(category);
+        this.setPrice(12);
+        this.setSmallImage(smallImage);
     }
 
     public int getId(){
@@ -79,10 +82,10 @@ public class Product {
         return this.price;
     }
     public String getPriceText(){
-        return String.format("%.2f", this.price);
+        return String.format("%.2f", this.getPrice());
     }
     public Float getSmallBitMap(){
-        return this.price;
+        return this.getPrice();
     }
 
     public String getSmallImage() {
@@ -244,7 +247,7 @@ public class Product {
     }
 
     public String toString() {
-        return this.name;
+        return this.getName();
     }
     public static Product getById(int _id) {
         for (Product product : Product.getProductsAsString()) {
@@ -256,38 +259,38 @@ public class Product {
 
     }
 
-    private Bitmap descargarImagen (String imageHttpAddress){
-        URL imageUrl = null;
-        Bitmap image = null;
-
-        String name = imageHttpAddress.replace("http://alpacanow.com", "_");
-        name = name.replace("http://cdn.alpacanow.com", "_");
-        name = name.replace("http://cdn.classicalpaca.com", "_");
-        name = name.replace("/", "_");
-
-        ContextWrapper cw = new ContextWrapper(contexto);
-        String archivos_rutas = cw.getFilesDir().getAbsolutePath();
-
-        String files_dir = "/data/data/com.sixquark.blanca.blanca/files/";
-        File file = new File(files_dir+name);
-        if (file.exists()) {
-            Bitmap myBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
-            return myBitmap;
-        }else {
-            try {
-                imageUrl = new URL(imageHttpAddress);
-                HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-                conn.connect();
-                image = BitmapFactory.decodeStream(conn.getInputStream());
-                String ruta = guardarImagen(contexto, name, image);
-                return image;
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            return image;
-        }
-
-    }
+//    private Bitmap descargarImagen (String imageHttpAddress){
+//        URL imageUrl = null;
+//        Bitmap image = null;
+//
+//        String name = imageHttpAddress.replace("http://alpacanow.com", "_");
+//        name = name.replace("http://cdn.alpacanow.com", "_");
+//        name = name.replace("http://cdn.classicalpaca.com", "_");
+//        name = name.replace("/", "_");
+//
+//        ContextWrapper cw = new ContextWrapper(getContexto());
+//        String archivos_rutas = cw.getFilesDir().getAbsolutePath();
+//
+//        String files_dir = "/data/data/com.sixquark.blanca.blanca/files/";
+//        File file = new File(files_dir+name);
+//        if (file.exists()) {
+//            Bitmap myBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+//            return myBitmap;
+//        }else {
+//            try {
+//                imageUrl = new URL(imageHttpAddress);
+//                HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+//                conn.connect();
+//                image = BitmapFactory.decodeStream(conn.getInputStream());
+//                String ruta = guardarImagen(getContexto(), name, image);
+//                return image;
+//            } catch (IOException ex) {
+//                ex.printStackTrace();
+//            }
+//            return image;
+//        }
+//
+//    }
 
     private String guardarImagen (Context context, String nombre, Bitmap imagen){
         ContextWrapper cw = new ContextWrapper(context);
@@ -305,4 +308,19 @@ public class Product {
         return myPath.getAbsolutePath();
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setSmallImage(String smallImage) {
+        this.smallImage = smallImage;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
 }
